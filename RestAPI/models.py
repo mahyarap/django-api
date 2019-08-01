@@ -6,9 +6,9 @@ from django.db import models
 
 class Weather(models.Model):
     id = models.IntegerField(primary_key=True)
-    date = models.DateTimeField()
+    date = models.DateField()
     location = models.ForeignKey('Location', on_delete=models.CASCADE)
-    temperature = models.ForeignKey('Temperature', on_delete=models.CASCADE)
+    temperature = models.TextField()
 
 
 class Location(models.Model):
@@ -16,9 +16,3 @@ class Location(models.Model):
     lon = models.FloatField()
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
-
-
-class Temperature(models.Model):
-    location = models.ForeignKey('Location', on_delete=models.CASCADE)
-    value = models.FloatField()
-    created_at = models.DateTimeField(auto_now=True)
