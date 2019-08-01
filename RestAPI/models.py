@@ -5,6 +5,7 @@ from django.db import models
 
 
 class Weather(models.Model):
+    id = models.IntegerField(primary_key=True)
     date = models.DateTimeField()
     location = models.ForeignKey('Location', on_delete=models.CASCADE)
     temperature = models.ForeignKey('Temperature', on_delete=models.CASCADE)

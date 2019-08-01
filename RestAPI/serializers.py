@@ -3,9 +3,15 @@ from .models import Weather, Location
 
 
 class WeatherSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
     class Meta:
         model = Weather
-        fields = ['id', 'date', 'location', 'temperature']
+        fields = ['date', 'location', 'temperature']
+        
+    def validate_id(self, value):
+        raise
+        if not isinstance(int, value):
+            raise serializers.ValidationError('Enter a whole number.')
      
 
 class LocationSerializer(serializers.ModelSerializer):

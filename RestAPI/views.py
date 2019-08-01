@@ -6,7 +6,6 @@ from rest_framework import viewsets
 from . import serializers, models
 
 
-class WeatherView(viewsets.ModelViewSet):
+class WeatherViewSet(viewsets.ModelViewSet):
     queryset = models.Weather.objects.all()
-    serializer_class = serializers.WeahterSerializer
-    
+    serializer_class = serializers.WeatherSerializer
