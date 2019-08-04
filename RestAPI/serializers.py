@@ -1,6 +1,7 @@
 import json
 
 from django.db import IntegrityError, transaction
+
 from rest_framework import serializers
 
 from .models import Weather, Location
@@ -16,8 +17,12 @@ class LocationSerializer(serializers.ModelSerializer):
         
 
 class WeatherSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(error_messages={'invalid': 'Enter a whole number.'})
-    date = serializers.DateField(error_messages={'invalid': 'Enter a valid date/time.'})
+    id = serializers.IntegerField(
+        error_messages={'invalid': 'Enter a whole number.'}
+    )
+    date = serializers.DateField(
+        error_messages={'invalid': 'Enter a valid date/time.'}
+    )
     location = LocationSerializer()
     temperature = serializers.ListField(child=serializers.FloatField())
 
@@ -48,5 +53,7 @@ class WeatherSerializer(serializers.ModelSerializer):
         try:
             weather = Weather.objects.create(**validated_data, location=location)
         except IntegrityError:
-            raise serializers.ValidationError({'id': ['Weather with this Id already exists.']})
+            raise serializers.ValidationError(
+                {'id': ['Weather with this Id already exists.']}
+            )
         return weather
